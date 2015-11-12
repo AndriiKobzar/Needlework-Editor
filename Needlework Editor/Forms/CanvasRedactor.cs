@@ -27,7 +27,7 @@ namespace Needlework_Editor
         int width;
         int height;
 
-        Pen white = new Pen(Color.White);
+        SolidBrush white = new SolidBrush(Color.White);
 
         NEBackground back = new NEBackground();
         public NEBackground Background
@@ -44,6 +44,7 @@ namespace Needlework_Editor
         }
         private void DrawCanvas()
         {
+            g = canvas.CreateGraphics();
             canvas.CreateGraphics().Clear(Color.White);
             canvas.Width = int.Parse(canvasWidth.Text);
             canvas.Height = int.Parse(canvasHeight.Text);
@@ -59,7 +60,7 @@ namespace Needlework_Editor
             }
             foreach(Rectangle rect in removedThreads)
             {
-                g.DrawRectangle(white, rect);
+                g.FillRectangle(white, rect);
             }
         }
         private void CanvasRedactor_Load(object sender, EventArgs e)
@@ -71,7 +72,8 @@ namespace Needlework_Editor
             try
             {
                 width = int.Parse(canvasWidth.Text);
-                errorProvider1.Clear();DrawCanvas();
+                errorProvider1.Clear();
+                DrawCanvas();
                 back.Width = width;
             }
             catch { errorProvider1.SetError(canvasWidth, "Некоректне значення"); }            
@@ -92,7 +94,8 @@ namespace Needlework_Editor
             SaveFileDialog dialog = new SaveFileDialog();
             if(dialog.ShowDialog() == DialogResult.OK)
             {
-                back.Save(dialog.FileName + ".neb");             
+                back.Save(dialog.FileName + ".neb");
+                back.IsSaved = true;
             }
 
         }
@@ -144,6 +147,15 @@ namespace Needlework_Editor
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             DrawCanvas();
+        }
+
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            if (removedThreads.Count > 0)
+            {
+                removedThreads.RemoveAt(removedThreads.Count - 1);
+                DrawCanvas();
+            }
         }
     }
 }

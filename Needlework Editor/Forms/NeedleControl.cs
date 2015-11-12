@@ -31,7 +31,7 @@ namespace Needlework_Editor
 
         private void NeedleControl_Load(object sender, EventArgs e)
         {
-            this.CreateGraphics().DrawEllipse(new Pen(Color.Black), 0, 0, this.Width, this.Height);
+            this.CreateGraphics().DrawEllipse(new Pen(Color.Black), 0, 0, this.Width-1, this.Height-1);
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -41,7 +41,7 @@ namespace Needlework_Editor
 
         private void NeedleControl_Paint(object sender, PaintEventArgs e)
         {
-            this.CreateGraphics().DrawEllipse(new Pen(Color.Black), 0, 0, this.Width, this.Height);
+            this.CreateGraphics().DrawEllipse(new Pen(Color.Black), 0, 0, this.Width-1, this.Height-1);
         }
 
         private void pictureBox1_MouseMove_1(object sender, MouseEventArgs e)

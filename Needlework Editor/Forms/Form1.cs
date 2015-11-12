@@ -703,5 +703,22 @@ namespace Needlework_Editor
             }
             Draw();
         }
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            if(canvas!=null && !canvas.IsSaved)
+            {                
+                if(MessageBox.Show("Полотно не збережене. Бажаєте зберегти його?", "ПОПЕРЕДЖЕННЯ", MessageBoxButtons.YesNo)==DialogResult.OK)
+                {
+                    using(SaveFileDialog filepicker = new SaveFileDialog())
+                    {
+                        if(filepicker.ShowDialog()== System.Windows.Forms.DialogResult.OK)
+                        {
+                            canvas.Save(filepicker.FileName);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

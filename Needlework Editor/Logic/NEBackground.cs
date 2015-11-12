@@ -11,6 +11,13 @@ namespace Needlework_Editor
         List<Rectangle> removed = new List<Rectangle>();
         int distance = 5;
         int width = 500;
+        bool isSaved = false;
+
+        public bool IsSaved
+        {
+            get { return isSaved; }
+            set { isSaved = value; }
+        }
 
         public int Width
         {
